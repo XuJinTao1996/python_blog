@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user %}
+        <script type="text/javascript">
+            function change_head() {
+                document.getElementById('form').submit()
+            }
+        </script>
+        <div style="padding-left: 50px">
+            <li style="margin-bottom: 12px;padding-top: 5px;">用户名:&nbsp;&nbsp;{{ user.username }}</li><hr width="600px">
+            <li style="margin-bottom: 12px;padding-top: 5px;">性别:&nbsp;&nbsp;{% if user.sex == 1 %}男{% else %}女{% endif %}</li><hr width="600px">
+            <li style="margin-bottom: 12px;padding-top: 5px;">年龄:&nbsp;&nbsp;{{ user.age }}</li><hr width="600px">
+            <li style="margin-bottom: 12px;padding-top: 5px;"><span style="float: left">头像:&nbsp;&nbsp;</span>
+                <form action="/user/update_head/" method="post" id="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="file"><img src="/medias/{{ user.head }}" title="点击更换头像"></label>
+                    <input id="file" type='file' style="display: none;" onchange="change_head()" name="head">
+                </form>
+        </li><hr width="600px"></label>
+        </div>
+    {% endif %}
+{% endblock %}

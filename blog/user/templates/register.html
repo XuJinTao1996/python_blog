@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style type="text/css">
+        #register input{
+            margin: 10px auto;
+            width: 300px;
+            height: 30px;
+        }
+        #sex{
+            width: 30px;
+            height: 18px;
+        }
+        #register input:last-child{
+            width: 320px;
+            height: 35px;
+            margin-left: 20px;
+            background-color: deepskyblue;
+            border-radius: 5%;
+            border: 1px solid deepskyblue;
+            color: white;
+        }
+    </style>
+    <form action="/user/register/" id="register" method="post" enctype="multipart/form-data" style="padding-top: 20px;padding-left: 50px;">
+        {% csrf_token %}
+        账号：<input type="text" name="username" id="username"><br>
+        密码：<input type="password" name="passwd" id="passwd"><br>
+        头像：<input type="file" name="head" id="head"><br>
+        年龄：<input type="text" name="age" id="age"><br>
+        性别：<input style=" width: 30px;height: 18px;" type="radio" id="sex" name="sex" value="1" checked>男
+        <input style=" width: 30px;height: 18px;" type="radio" id="sex" name="sex" value="0">女<br>
+        <input type="submit" value="注册">
+    </form>
+{% endblock %}

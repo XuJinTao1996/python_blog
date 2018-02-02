@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'publish.css' %}">
+
+{% block content %}
+    <form action="/post/publish/" method="post" style="padding: 10px 50px;">
+    {% csrf_token %}
+        标题: <input type="text" name="title" style="height: 30px; width: 500px; margin-bottom: 10px"><br/>
+        <textarea name="content" id="editor1" class="ckeditor" rows="10" cols="80">
+        请输入文章内容
+        </textarea><br/>
+        标签: <input type="'text" name="tags" style="height: 30px; width: 300px; margin-bottom: 10px"><br/>
+        <input type="submit" name="submit" value="发布" style="height: 30px; width: 100px;border: none; background-color: deepskyblue;color: white;border-radius: 5%;"><br>
+    </form>
+{% endblock %}

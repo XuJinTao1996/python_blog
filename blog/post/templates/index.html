@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <li style="height: 40px;line-height: 40px;"><h3 style="font-family: '楷体';margin-left: 10px;">文章列表</h3><hr></li>
+    {% for article in articles %}
+        <li style="margin-top: 10px;font-size: 20px;color: gray;padding-left: 50px;"><span>{{ article.date }} </span>&nbsp;&nbsp;<a style="font-family: '楷体" href="/post/detail/?aid={{ article.id }}">{{ article.title }}</a></li>
+    {% endfor %}
+    <li style="margin-top: 10px;font-size: 20px;color: gray;position: absolute; left: 50px;bottom: 20px">
+        {% for page_num in pages_num_list %}
+            <a style="text-decoration-line: underline;" href="/post/index/{{ page_num }}/">{{ page_num }}</a>
+        {% endfor %}
+    </li>
+{% endblock %}
+
+{% block other %}
+    {% if articles_count %}
+        <li><h3 style="font-family: '楷体'; margin-left: 10px;margin-bottom: 10px;">热门文章</h3><hr></li>
+        {% for article, count in articles_count %}
+            <li style="margin:10px 0;font-size: 20px;color: gray;padding-left: 50px;"><span>{{ article.date }} </span>&nbsp;&nbsp;<a style="font-family: '楷体" href="/post/detail/?aid={{ article.id }}">{{ article.title }}</a><span style="font-family: '楷体';font-size:16px;float: right;margin-right: 10px;">访问次数:{{ count }}</span></li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

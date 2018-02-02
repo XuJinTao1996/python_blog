@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    {% if article %}
+        <li style="padding-left: 50px;padding-right: 50px;padding-top: 20px;;">
+            <div style="width: 100%;text-align: center;height: 50px;line-height: 50px;">
+                <h2 style="font-family: '楷体'">{{ article.title }}</h2><hr style="margin-bottom: 10px;" color="#F7F7F7">
+            </div>
+            <div style="margin-top: 30px;padding-left: 80px;padding-right: 80px;">
+                <article>
+                {% autoescape off %}
+                    {{ article.content }}
+                {% endautoescape %}
+                </article>
+            </div>
+        </li>
+        <span style="float: right; margin-right: 20px"><a href="/post/editor/?aid={{ article.id }}">编辑</a>&nbsp;&nbsp;<a href="/post/delete/?aid={{ article.id }}">删除</a></span></span>
+    {% endif %}
+    <li style="margin-top: 10px;font-size: 15px;color: gray;position: absolute; left: 50px;bottom: 20px">
+        标签: &nbsp;
+        {% for tag in article.tags %}
+            <a href="#">{{ tag.name }}&nbsp;&nbsp;</a>
+        {% endfor %}
+    </li>
+{% endblock %}
+
+{% block other %}
+    {% if comments %}
+        {% for comment in comments %}
+            <li style="padding-left: 50px; padding-top: 20px; padding-bottom: 15px;">
+                <p>{{ comment.name }}说:</p>
+                <p style="margin-left: 50px">
+                    {{ comment.content }}
+                </p>
+            </li>
+            <hr style="height:1px;border:none;border-top:1px dashed darkcyan;width: 90%;margin: 0 auto;" />
+        {% endfor %}
+    {% endif %}
+    <li style="padding-left: 50px; padding-top: 20px; margin-top: 20px;">
+        <form action="/post/comment/{{ article.id }}/" method="post">
+            {% csrf_token %}
+            <span style="float: left">评论内容:&nbsp;</span><textarea name="comment" rows="10" cols="80"></textarea><br>
+            <input type="submit" value="评论" style="width: 50px;height: 30px;margin-bottom: 20px"><br>
+        </form>
+    </li>
+{% endblock %}

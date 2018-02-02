@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if articles %}
+        {% for article in articles %}
+            <li style="margin-top: 10px;font-size: 20px;color: gray;padding-left: 50px;"><span>{{ article.date }} </span>&nbsp&nbsp<a href="/post/detail/?aid={{ article.id }}">{{ article.title }}</a></li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

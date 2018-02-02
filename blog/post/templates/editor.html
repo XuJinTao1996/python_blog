@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+    <style type="text/css">
+        #edit{
+            padding-top: 20px;
+            padding-left: 50px;
+        }
+        #edit input{
+            height: 30px;
+            width: 550px;
+            margin-bottom: 10px;
+        }
+        #edit input:last-child{
+            background-color: deepskyblue;
+            border-radius: 5%;
+            border: 1px solid deepskyblue;
+        }
+    </style>
+    <form action="/post/editor/?aid={{ article.id }}" method="post" id="edit">
+        {% csrf_token %}
+        <label for="title">标题</label>
+        <input type="text" name="title" id="title" value="{{ article.title }}"><br>
+        <textarea name="content" id="editor1" class="ckeditor" rows="10" cols="80">
+        {{ article.content }}
+        </textarea><br>
+        <label for="tags">标签</label>
+        <input type="text" name="tags" id="title"  style="width:300px;" value={{ tags }}><br>
+        <input type="submit" value="更改" style="width:350px;">
+    </form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="/user/login/" method="post" style="padding-left: 50px;">
+        {% csrf_token %}
+        <label for="nickname">用户名: </label>
+        <input type="text" name="username" id="username" style="height: 30px; width: 300px;margin-top: 20px;"><br/>
+        <label for="passwd">密&nbsp;&nbsp;&nbsp;码: </label>
+        <input type="password" name="passwd" id="passwd" style="height: 30px; width: 300px;margin-top: 20px"><br/>
+        <input type="submit" value="登陆" style="margin-left:55px;width: 300px;height: 35px;margin-top: 20px;color: white;background-color: deepskyblue;border: 1px solid deepskyblue;border-radius: 5%;">
+    </form>
+{% endblock %}
